@@ -47,7 +47,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       bg={useColorModeValue("teal.100", "orange.100")}
       borderRight="1px"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
-      w={{ base: "full", md: 60 }}
+      w={{ base: "full", md: "xs" }}
       pos="fixed"
       h="full"
       {...rest}
@@ -62,7 +62,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           Logo
         </Text>
         <CloseButton
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", md: "flex" }}
           onClick={onClose}
         ></CloseButton>
       </Flex>
@@ -118,16 +118,22 @@ interface MobileProps extends FlexProps {
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   return (
     <Flex
-      ml={{ base: 0, md: 60 }}
-      px={{ base: 4, md: 24 }}
-      height="20"
       alignItems={"center"}
-      bg={useColorModeValue("white", "gray.900")}
+      justifyContent={"space-between"}
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue("gray.200", "gray.700")}
-      justifyContent={"flex-start"}
-      {...rest}
+      bg={useColorModeValue("white", "gray.900")}
+      minH={"16"}
+      // bgColor={"blue.100"}
     >
+      {/* <Flex
+        ml={{ base: 0, md: 60 }}
+        px={{ base: 4, md: 24 }}
+        // alignItems={"center"}
+        bg={useColorModeValue("white", "gray.900")}
+        // justifyContent={"flex-start"}
+        // display={{ base: "flex", md: "flex" }}
+      > */}
       <IconButton
         variant={"outline"}
         onClick={onOpen}
@@ -137,6 +143,15 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       <Text fontSize={"2xl"} ml="8" fontFamily={"monospace"} fontWeight="bold">
         Logo
       </Text>
+      {/* </Flex> */}
+      {/* <Flex alignItems={"center"} bg={useColorModeValue("white", "gray.900")}>
+        <IconButton
+          variant={"outline"}
+          icon={<FiMenu></FiMenu>}
+          aria-label="open menu"
+          // onClick={onOpen}
+        ></IconButton>
+      </Flex> */}
     </Flex>
   );
 };
@@ -146,16 +161,16 @@ export const TestSidebar = ({ children }: { children: ReactNode }) => {
 
   return (
     <Box minH={"100vh"} bg={useColorModeValue("gray.100", "gray.900")}>
-      <SidebarContent
+      {/* <SidebarContent
         display={{ base: "none", md: "block" }}
         onClose={() => onClose}
-      ></SidebarContent>
+      ></SidebarContent> */}
       <Drawer
         autoFocus={false}
         isOpen={isOpen}
         placement="left"
         onClose={onClose}
-        size="full"
+        size={"xs"}
         returnFocusOnClose={false}
         onOverlayClick={onClose}
       >
@@ -163,10 +178,10 @@ export const TestSidebar = ({ children }: { children: ReactNode }) => {
           <SidebarContent onClose={onClose}></SidebarContent>
         </DrawerContent>
       </Drawer>
-      <MobileNav
-        onOpen={onOpen}
-        display={{ base: "flex", md: "none" }}
-      ></MobileNav>
+      <MobileNav onOpen={onOpen}></MobileNav>
+      <Box bg={"orange.100"} ml={{ base: "0", md: "60" }}>
+        {children}
+      </Box>
     </Box>
   );
 };

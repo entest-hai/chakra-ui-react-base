@@ -6,7 +6,7 @@ import { TestSidebar } from "./components/TestSidebar";
 export const App = () => (
   <ChakraProvider theme={theme}>
     <TestSidebar>
-      <>Hello Hai Tran</>
+      <>Content Here</>
     </TestSidebar>
   </ChakraProvider>
 );
